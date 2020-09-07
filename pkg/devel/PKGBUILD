@@ -1,0 +1,28 @@
+# Maintainer: <loongarmz@gmail.com>
+pkgname=longarmz-devel
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Base system configuration for longarmz systems"
+arch=('any')
+url="https://github.com/longarmz/arch-pkgs"
+license=('MIT')
+
+depends=(longarmz-base)
+
+#base-devel
+depends+=(
+	autoconf automake binutils bison fakeroot file 
+	findutils flex gawk gcc gettext grep groff gzip 
+	libtool m4 make pacman patch pkgconf sed sudo
+	texinfo which
+)
+#essential extras
+depends+=(
+	git aurutils s3cmd
+)
+
+rootdir=$PWD
+
+package() {
+	cp -a "$rootdir/files/"* "$pkgdir"
+}

@@ -1,0 +1,3 @@
+# Managed by longarmz-base package
+
+%wheel ALL=(ALL) ALL

@@ -1,0 +1,33 @@
+# Maintainer: longarmz <loongarmz@gmail.com>
+pkgname=longarmz-base
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="System config for longarmz systems"
+arch=('any')
+url="https://github.com/longarmz/arch-pkgs"
+license=('MIT')
+
+install=longarmz-base.install
+
+#base group
+depends=(
+	bash bzip2 coreutils file filesystem findutils 
+	gawk gcc-libs gettext glibc grep gzip iproute2 
+	iputils licenses pacman pciutils procps-ng psmisc
+	sed shadow systemd systemd-sysvcompat tar util-linux
+	xz linux
+)
+
+#essential extras
+depends+=(
+	bat curl grub efibootmgr exa fd fzf htop intel-ucode 
+	linux-firmware ncdu man-db man-pages mosh networkmanager 
+	openssh pacman-contrib sudo tmux unzip vim which zip zsh
+)
+
+rootdir=$PWD
+
+package() {
+	cp -a "$rootdir/files/"* "$pkgdir"
+	chmod -R 0750 "$pkgdir/etc/sudoers.d"
+}
