@@ -1,0 +1,46 @@
+#!/bin/bash
+# Wraps aursync command to mount an amazon s3 bucket which contains a repository
+set -uo pipefail
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+REMOTE_PATH=s3://longarmz-arch/repo/x86_64
+LOCAL_PATH=$HOME/.local/share/arch-repo
+PKG_PATH=$HOME/arch-pkgs/pkg
+REPO_NAME=longarmz
+
+PACKAGES=${@:-pkg/*}
+CHROOT="$HOME/.local/share/arch-root"
+
+mkdir -p "$LOCAL_PATH"
+mkdir -p "$CHROOT"
+
+#Setup a clean chroot to build packages
+[[ -d "$CHROOT/root" ]] || mkarchroot -C /etc/pacman.conf "$CHROOT/root" \
+    bash bzip2 coreutils cryptsetup device-mapper dhcpcd diffutils e2fsprogs \
+    file filesystem findutils gawk gcc-libs gettext glibc grep gzip inetutils \
+    iproute2 iputils less licenses linux logrotate man-db man-pages mdadm \
+    pacman pciutils perl procps-ng psmisc s-nail sed shadow sysfsutils \
+    systemd-sysvcompat tar texinfo usbutils util-linux which base-devel
+
+#Build all packages 
+for package in $PACKAGES; do (
+    cd "$package" || ( echo "No such directory: $package"; exit 1 )
+    rm -f ./*.pkg.tar.zst
+    makechrootpkg -cur "$CHROOT"
+) done
+
+#Sync remote DB to local DB
+s3cmd sync "$REMOTE_PATH/$REPO_NAME".{db,files}.tar.xz "$LOCAL_PATH/"
+ln -sf "$REPO_NAME.db.tar.xz" "$LOCAL_PATH/$REPO_NAME.db"
+ln -sf "$REPO_NAME.files.tar.xz" "$LOCAL_PATH/$REPO_NAME.files"
+
+#Add packages to local DB
+repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/base/*.pkg.tar.zst
+repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/devel/*.pkg.tar.zst
+
+#Sync local DB to remote DB
+s3cmd sync --follow-symlinks --acl-public \
+    "$PKG_PATH"/base/*.pkg.tar.zst \
+    "$PKG_PATH"/devel/*.pkg.tar.zst \
+    "$LOCAL_PATH/$REPO_NAME".{db,files}{,.tar.xz} \
+    "$REMOTE_PATH/"
