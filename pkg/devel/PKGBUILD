@@ -18,7 +18,7 @@ depends+=(
 )
 #essential extras
 depends+=(
-	git aurutils s3cmd
+	aurutils devtools git s3cmd
 )
 
 rootdir=$PWD
