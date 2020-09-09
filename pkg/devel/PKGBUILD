@@ -20,7 +20,7 @@ depends+=(
 depends+=(
 	aurutils devtools git s3cmd
 )
-
+#probably havr to link your repo in /usr/share/devtools/your repo >> /etc/pacman.conf if you want to sync in chroot
 rootdir=$PWD
 
 package() {

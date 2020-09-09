@@ -37,6 +37,7 @@ ln -sf "$REPO_NAME.files.tar.xz" "$LOCAL_PATH/$REPO_NAME.files"
 #Add packages to local DB
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/base/*.pkg.tar.zst
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/devel/*.pkg.tar.zst
+#repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "${PACKAGES[@]}"/*.pkg.tar.zst
 
 #Sync local DB to remote DB
 s3cmd sync --follow-symlinks --acl-public \
