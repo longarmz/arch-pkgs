@@ -1,10 +1,10 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-devel
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
-pkgdesc="Base system configuration for longarmz systems"
+pkgdesc="dev tools for longarmz systems"
 arch=('any')
-url="https://github.com/longarmz/arch-pkgs"
+url="https://github.com/longarmz/arch-pkgs/pkg/devel/"
 license=('MIT')
 
 depends=(longarmz-base)
@@ -18,11 +18,11 @@ depends+=(
 )
 #essential extras
 depends+=(
-	aurutils devtools git s3cmd
+	aurutils devtools s3cmd
 )
 #probably havr to link your repo in /usr/share/devtools/your repo >> /etc/pacman.conf if you want to sync in chroot
 rootdir=$PWD
 
-package() {
-	cp -a "$rootdir/files/"* "$pkgdir"
-}
+#package() {
+#	cp -a "$rootdir/files/"* "$pkgdir"
+#}

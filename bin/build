@@ -5,7 +5,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 REMOTE_PATH=s3://longarmz-arch/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
-PKG_PATH=$HOME/arch-pkgs/pkg
+PKG_PATH=$HOME/repo/arch-pkgs/pkg
 REPO_NAME=longarmz
 
 PACKAGES=${@:-pkg/*}
@@ -37,11 +37,13 @@ ln -sf "$REPO_NAME.files.tar.xz" "$LOCAL_PATH/$REPO_NAME.files"
 #Add packages to local DB
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/base/*.pkg.tar.zst
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/devel/*.pkg.tar.zst
+repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/desktop/*.pkg.tar.zst
 #repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "${PACKAGES[@]}"/*.pkg.tar.zst
 
 #Sync local DB to remote DB
 s3cmd sync --follow-symlinks --acl-public \
     "$PKG_PATH"/base/*.pkg.tar.zst \
     "$PKG_PATH"/devel/*.pkg.tar.zst \
+    "$PKG_PATH"/desktop/*.pkg.tar.zst \
     "$LOCAL_PATH/$REPO_NAME".{db,files}{,.tar.xz} \
     "$REMOTE_PATH/"

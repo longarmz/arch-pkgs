@@ -1,10 +1,10 @@
 # Maintainer: longarmz <loongarmz@gmail.com>
 pkgname=longarmz-base
-pkgver=0.0.3
+pkgver=0.0.4
 pkgrel=1
-pkgdesc="System config for longarmz systems"
+pkgdesc="base config for longarmz systems"
 arch=('any')
-url="https://github.com/longarmz/arch-pkgs"
+url="https://github.com/longarmz/arch-pkgs/pkg/base/"
 license=('MIT')
 
 install=longarmz-base.install
@@ -20,9 +20,9 @@ depends=(
 
 #essential extras
 depends+=(
-	bat curl exa fd fzf htop intel-ucode 
-	linux-firmware ncdu man-db man-pages mosh networkmanager 
-	openssh pacman-contrib sudo tmux unzip vim which zip zsh
+	bat curl exa fd fzf git htop intel-ucode linux-firmware 
+	ncdu man-db man-pages mosh networkmanager openssh pacman-contrib 
+	sudo tmux unzip vim which zip zsh
 )
 
 rootdir=$PWD

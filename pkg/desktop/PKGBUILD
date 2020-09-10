@@ -1,0 +1,22 @@
+# Maintainer: <loongarmz@gmail.com>
+pkgname=longarmz-desktop
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="gui for longarmz systems"
+arch=('any')
+url="https://github.com/longarmz/arch-pkgs/pkg/desktop/"
+license=('MIT')
+
+depends=(longarmz-base)
+
+#bare bones
+depends+=(
+	arandr dmenu i3-gaps i3blocks i3lock i3status firefox feh neofetch 
+	pavucontrol pulseaudio-alsa picom rxvt-unicode ttf-dejavu 
+	ttf-font-awesome xorg-server xorg-xinit xorg-xrandr 
+)
+rootdir=$PWD
+
+#package() {
+#	cp -a "$rootdir/files/"* "$pkgdir"
+#}
