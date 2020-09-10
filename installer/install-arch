@@ -20,6 +20,10 @@ hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
 clear
 : ${hostname:?"hostname cannot be empty"}
 
+email=$(dialog --stdout --inputbox "Enter email" 0 0) || exit 1
+clear
+: ${email:?"email cannot be empty"}
+
 user=$(dialog --stdout --inputbox "Enter admin username" 0 0) || exit 1
 clear
 : ${user:?"user cannot be empty"}
@@ -43,7 +47,7 @@ timedatectl set-ntp true
 
 ### Setup the disk and partitions ###
 swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
-swap_end=$(( $swap_size + 129 + 1 ))MiB
+swap_end=$(( $swap_size + 129 + 3001 ))MiB
 
 parted --script "${device}" -- mklabel gpt \
   mkpart ESP fat32 1Mib 129MiB \
@@ -63,7 +67,7 @@ wipefs "${part_root}"
 
 mkfs.vfat -F32 "${part_boot}"
 mkswap "${part_swap}"
-mkfs.f2fs -f "${part_root}"
+mkfs.ext4 -f "${part_root}"
 
 swapon "${part_swap}"
 mount "${part_root}" /mnt
@@ -78,7 +82,7 @@ Server = $REPO_URL
 EOF
 
 pacstrap /mnt longarmz-base
-genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
+genfstab -U  /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
 cat >>/mnt/etc/pacman.conf <<EOF
@@ -100,10 +104,13 @@ initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
 
-echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+#echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
+
+arch-chroot /mnt git config --global user.email "$email"
+arch-chroot /mnt git config --global user.name "$user"
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
