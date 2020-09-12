@@ -1,0 +1,21 @@
+# Maintainer: <loongarmz@gmail.com>
+pkgname=longarmz-xps13
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="xps13 xtras"
+arch=('any')
+url="https://github.com/longarmz/arch-pkgs/pkg/xps13/"
+license=('MIT')
+
+install=longarmz-xps13.install
+
+#basics
+depends=(
+	bluez bluez-utils light tlp vulkan-intel xf86-video-intel 
+)
+
+rootdir=$PWD
+
+package() {
+	cp -a "$rootdir/files/"* "$pkgdir"
+}

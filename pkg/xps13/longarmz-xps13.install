@@ -1,0 +1,4 @@
+post_install() {
+	systemctl enable --now tlp.service
+	systemctl enable --now bluetooth.service
+}

@@ -1,7 +1,7 @@
 #!/bin/bash
 # WARNING: this script will destroy data on the selected disk.
 # This script can be run by executing the following:
-#   curl -sL https://git.io/vAoV8 | bash
+#   curl -sL https://git.io/JUWAO | bash
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
@@ -67,7 +67,7 @@ wipefs "${part_root}"
 
 mkfs.vfat -F32 "${part_boot}"
 mkswap "${part_swap}"
-mkfs.ext4 -f "${part_root}"
+mkfs.ext4 "${part_root}"
 
 swapon "${part_swap}"
 mount "${part_root}" /mnt
@@ -104,13 +104,17 @@ initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
 
-#echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
-
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
 
-arch-chroot /mnt git config --global user.email "$email"
-arch-chroot /mnt git config --global user.name "$user"
+arch-chroot /mnt sudo -u "$user" git config --global user.email "$email"
+arch-chroot /mnt sudo -u "$user" git config --global user.name "$user"
 
-echo "$user:$password" | chpasswd --root /mnt
-echo "root:$password" | chpasswd --root /mnt
+arch-chroot /mnt sudo -u "$user" git clone --bare https://github.com/longarmz/dotfiles $HOME/.cfg
+arch-chroot /mnt sudo -u "$user" git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ checkout
+arch-chroot /mnt sudo -u "$user" git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ config status.showUntrackedFiles no
+
+arch-chroot /mnt sudo -u "$user" systemctl --user enable redshift
+
+arch-chroot /mnt echo "$password" | passwd  --stdin root
+arch-chroot /mnt echo "$password" | passwd  --stdin "$user"
