@@ -1,0 +1,4 @@
+post_install() {
+	systemctl --usr enable redshift-gtk
+	cp /etc/geoclue/longarmz-geoclue.conf /etc/geoclue/geoclue.conf
+}

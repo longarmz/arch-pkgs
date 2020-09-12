@@ -11,7 +11,7 @@ install=longarmz-xps13.install
 
 #basics
 depends=(
-	bluez bluez-utils light tlp vulkan-intel xf86-video-intel 
+	autorandr bluez bluez-utils light tlp vulkan-intel xf86-video-intel 
 )
 
 rootdir=$PWD

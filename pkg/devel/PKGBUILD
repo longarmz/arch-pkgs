@@ -1,16 +1,14 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-devel
-pkgver=0.0.2
+pkgver=0.0.3
 pkgrel=1
-pkgdesc="dev tools for longarmz systems"
+pkgdesc="development tools for longarmz systems"
 arch=('any')
 url="https://github.com/longarmz/arch-pkgs/pkg/devel/"
 license=('MIT')
 
-depends=(longarmz-base)
-
 #base-devel
-depends+=(
+depends=(
 	autoconf automake binutils bison fakeroot file 
 	findutils flex gawk gcc gettext grep groff gzip 
 	libtool m4 make pacman patch pkgconf sed sudo
@@ -21,8 +19,4 @@ depends+=(
 	aurutils devtools s3cmd
 )
 #probably havr to link your repo in /usr/share/devtools/your repo >> /etc/pacman.conf if you want to sync in chroot
-rootdir=$PWD
 
-#package() {
-#	cp -a "$rootdir/files/"* "$pkgdir"
-#}
