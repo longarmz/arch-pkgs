@@ -20,20 +20,9 @@ hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
 clear
 : ${hostname:?"hostname cannot be empty"}
 
-email=$(dialog --stdout --inputbox "Enter email" 0 0) || exit 1
-clear
-: ${email:?"email cannot be empty"}
-
 user=$(dialog --stdout --inputbox "Enter admin username" 0 0) || exit 1
 clear
 : ${user:?"user cannot be empty"}
-
-password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
-clear
-: ${password:?"password cannot be empty"}
-password2=$(dialog --stdout --passwordbox "Enter admin password again" 0 0) || exit 1
-clear
-[[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
 
 devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
 device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
@@ -106,15 +95,3 @@ EOF
 
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
-
-arch-chroot /mnt sudo -u "$user" git config --global user.email "$email"
-arch-chroot /mnt sudo -u "$user" git config --global user.name "$user"
-
-arch-chroot /mnt sudo -u "$user" git clone --bare https://github.com/longarmz/dotfiles $HOME/.cfg
-arch-chroot /mnt sudo -u "$user" git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ checkout
-arch-chroot /mnt sudo -u "$user" git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@ config status.showUntrackedFiles no
-
-arch-chroot /mnt sudo -u "$user" systemctl --user enable redshift
-
-arch-chroot /mnt echo "$password" | passwd  --stdin root
-arch-chroot /mnt echo "$password" | passwd  --stdin "$user"
