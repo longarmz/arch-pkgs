@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-desktop
-pkgver=0.0.6
+pkgver=0.0.7
 pkgrel=1
 pkgdesc="desktop configuration for longarmz systems"
 arch=('any')
@@ -9,13 +9,39 @@ license=('MIT')
 
 install=longarmz-desktop.install
 
-#bare bones
+#DE
 depends=(
-	arandr discord dmenu i3-gaps i3blocks i3lock i3status firefox feh neofetch 
-	network-manager-applet pavucontrol pulseaudio-alsa picom redshift rxvt-unicode 
-	ttf-font-awesome ttf-iosevka xorg-server xorg-xinit xorg-xrandr zathura 
-	zathura-pdf-mupdf
+	dmenu i3-gaps i3blocks i3lock i3status
+	sddm network-manager-applet picom 
+	rxvt-unicode
 )
+
+
+#Apps
+depends+=(
+	discord firefox plexamp-appimage 
+	zathura zathura-pdf-mupdf
+)
+
+#Fonts
+depends+=(
+	noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra 
+	ttf-dejavu ttf-font-awesome ttf-iosevka
+	xorg-fonts-misc
+)
+
+#Utils
+depends+=(
+	arandr bluez bluez-utils feh fuse2 neofetch 
+	pavucontrol pulseaudio-alsa redshift 
+)
+
+#X
+depends+=(
+	xdg-utils xorg-server xorg-xinit xorg-xrandr
+)
+
+
 rootdir=$PWD
 
 package (){

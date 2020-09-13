@@ -1,6 +1,6 @@
 # Maintainer: longarmz <loongarmz@gmail.com>
 pkgname=longarmz-base
-pkgver=0.0.4
+pkgver=0.0.5
 pkgrel=1
 pkgdesc="base config for longarmz systems"
 arch=('any')
@@ -22,7 +22,7 @@ depends=(
 depends+=(
 	bat curl exa fd fzf git htop intel-ucode linux-firmware 
 	ncdu man-db man-pages mosh networkmanager openssh pacman-contrib 
-	sudo tmux unzip vim which zip zsh
+	sudo tmux unzip vim which zip zsh zsh-completions
 )
 
 rootdir=$PWD
