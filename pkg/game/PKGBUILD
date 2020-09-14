@@ -1,0 +1,12 @@
+# Maintainer: longarmz <loongarmz@gmail.com>
+pkgname=longarmz-game
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="gaming config for longarmz systems"
+arch=(any)
+url="https://github.com/longarzm/arch-repo/pkg/game/"
+license=(MIT)
+
+depends=( 
+	steam lib32-libpulse ttf-liberation wqy-zenhei
+)

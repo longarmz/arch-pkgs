@@ -5,7 +5,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 REMOTE_PATH=s3://longarmz-arch/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
-PKG_PATH=$HOME/repo/arch-pkgs/pkg
+PKG_PATH=$HOME/dev/repos/arch-pkgs/pkg
 REPO_NAME=longarmz
 
 PACKAGES=${@:-pkg/*}
@@ -38,6 +38,8 @@ ln -sf "$REPO_NAME.files.tar.xz" "$LOCAL_PATH/$REPO_NAME.files"
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/base/*.pkg.tar.zst
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/devel/*.pkg.tar.zst
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/desktop/*.pkg.tar.zst
+repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/game/*.pkg.tar.zst
+repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/rgm79/*.pkg.tar.zst
 repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "$PKG_PATH"/xps13/*.pkg.tar.zst
 #repo-add "$LOCAL_PATH/$REPO_NAME.db.tar.xz" "${PACKAGES[@]}"/*.pkg.tar.zst
 
@@ -46,6 +48,8 @@ s3cmd sync --follow-symlinks --acl-public \
     "$PKG_PATH"/base/*.pkg.tar.zst \
     "$PKG_PATH"/devel/*.pkg.tar.zst \
     "$PKG_PATH"/desktop/*.pkg.tar.zst \
+    "$PKG_PATH"/game/*.pkg.tar.zst \
+    "$PKG_PATH"/rgm79/*.pkg.tar.zst \
     "$PKG_PATH"/xps13/*.pkg.tar.zst \
     "$LOCAL_PATH/$REPO_NAME".{db,files}{,.tar.xz} \
     "$REMOTE_PATH/"
