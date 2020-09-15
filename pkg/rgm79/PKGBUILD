@@ -1,6 +1,6 @@
 # Maintainer: longarmz <loongarmz@gmail.com>
 pkgname=longarmz-rgm79
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="rgm remix"
 arch=(any)
@@ -8,6 +8,6 @@ url="https://github.com/longarz/arch-repo/pkg/rgm79/"
 license=(MIT)
 
 depends=( 
-	nvidia nvidia-utils lib32-nvidia-utils 
+	nvidia nvidia-utils lib32-nvidia-utils nvidia-settings
 	plex-media-server-plexpass
 )

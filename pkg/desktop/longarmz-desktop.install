@@ -1,6 +1,6 @@
 post_install() {
 	systemctl enable sddm.service
 	systemctl enable --now bluetooth.service
-	systemctl --usr enable redshift
+	systemctl --user enable redshift
 	cp /etc/geoclue/longarmz-geoclue.conf /etc/geoclue/geoclue.conf
 }
