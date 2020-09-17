@@ -1,0 +1,3 @@
+post_install() {
+	ln -sf /etc/pacman.conf "/usr/share/devtools/pacman.a"
+}

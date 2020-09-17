@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-xps13
-pkgver=0.0.2
+pkgver=0.0.3
 pkgrel=1
 pkgdesc="xps13 xtras"
 arch=('any')
@@ -11,7 +11,8 @@ install=longarmz-xps13.install
 
 #basics
 depends=(
-	autorandr light tlp vulkan-intel xf86-video-intel 
+	autorandr light tlp vulkan-intel 
+	xf86-video-intel libinput-gestures 
 )
 
 rootdir=$PWD

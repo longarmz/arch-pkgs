@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-desktop
-pkgver=0.0.8
+pkgver=0.0.9
 pkgrel=1
 pkgdesc="desktop configuration for longarmz systems"
 arch=('any')
@@ -9,17 +9,18 @@ license=('MIT')
 
 install=longarmz-desktop.install
 
-#DE
+#Alpha
 depends=(
 	i3-gaps i3blocks i3lock i3status
-	sddm rofi network-manager-applet picom 
+	rofi network-manager-applet picom 
 	rxvt-unicode
 )
 
 
 #Apps
 depends+=(
-	discord firefox plexamp-appimage 
+	discord dropbox firefox 
+	moonlight-qt plexamp-appimage 
 	zathura zathura-pdf-mupdf
 )
 
@@ -32,7 +33,7 @@ depends+=(
 
 #Utils
 depends+=(
-	arandr bluez bluez-utils feh fuse2 neofetch 
+	arandr conky bluez bluez-utils feh fuse2 neofetch 
 	pavucontrol pulseaudio-alsa redshift 
 )
 

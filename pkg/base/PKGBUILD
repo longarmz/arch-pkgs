@@ -20,7 +20,7 @@ depends=(
 
 #essential extras
 depends+=(
-	bat curl exa fd fzf git htop intel-ucode linux-firmware 
+	bat curl exa efibootmgr fd fzf grub git htop intel-ucode linux-firmware 
 	ncdu man-db man-pages mosh networkmanager openssh pacman-contrib 
 	sudo tmux unzip vim which zip zsh zsh-completions
 )
