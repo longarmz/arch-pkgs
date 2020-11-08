@@ -5,7 +5,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 REMOTE_PATH=s3://longarmz-arch/repo/x86_64
 LOCAL_PATH=$HOME/.local/share/arch-repo
-PKG_PATH=$HOME/Development/repos/arch-pkgs/pkg
+PKG_PATH=$HOME/Develop/repos/arch-pkgs/pkg
 REPO_NAME=longarmz
 
 PACKAGES=${@:-pkg/*}

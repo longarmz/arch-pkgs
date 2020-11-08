@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-desktop
-pkgver=0.0.9
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="desktop configuration for longarmz systems"
 arch=('any')
@@ -34,7 +34,7 @@ depends+=(
 #Utils
 depends+=(
 	arandr conky bluez bluez-utils feh fuse2 neofetch 
-	pavucontrol pulseaudio-alsa redshift 
+	p7zip pavucontrol pulseaudio-alsa redshift 
 )
 
 #X

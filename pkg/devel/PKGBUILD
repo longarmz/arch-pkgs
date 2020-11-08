@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-devel
-pkgver=0.0.4
+pkgver=0.0.5
 pkgrel=1
 pkgdesc="development tools for longarmz systems"
 arch=('any')
@@ -9,10 +9,10 @@ license=('MIT')
 
 #base-devel
 depends=(
-	autoconf automake binutils bison fakeroot file 
+	autoconf automake autopep8 binutils bison fakeroot file 
 	findutils flex gawk gcc gettext grep groff gzip 
-	libtool m4 make pacman patch pkgconf sed sudo
-	texinfo which
+	libtool love m4 make pacman patch pkgconf python-pylint 
+	sed sudo texinfo visual-studio-code-bin which
 )
 #probably havr to link your repo in /usr/share/devtools/your repo >> /etc/pacman.conf if you want to sync in chroot
 

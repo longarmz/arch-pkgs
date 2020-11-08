@@ -1,6 +1,6 @@
 # Maintainer: longarmz <loongarmz@gmail.com>
 pkgname=longarmz-rgm79
-pkgver=0.0.3
+pkgver=0.0.4
 pkgrel=1
 pkgdesc="rgm remix"
 arch=(any)
@@ -12,5 +12,5 @@ license=(MIT)
 depends=( 
 	aurutils devtools s3cmd
 	nvidia nvidia-utils lib32-nvidia-utils nvidia-settings
-	plex-media-server-plexpass
+	ntfs-3g ntp plex-media-server-plexpass sonarr
 )
