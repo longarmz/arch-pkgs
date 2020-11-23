@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-devel
-pkgver=0.0.5
+pkgver=0.0.9
 pkgrel=1
 pkgdesc="development tools for longarmz systems"
 arch=('any')
@@ -11,8 +11,15 @@ license=('MIT')
 depends=(
 	autoconf automake autopep8 binutils bison fakeroot file 
 	findutils flex gawk gcc gettext grep groff gzip 
-	libtool love m4 make pacman patch pkgconf python-pylint 
+	libtool love m4 make pacman patch pkgconf 
+	python-keyring python-pip python-pylint 
 	sed sudo texinfo visual-studio-code-bin which
+)
+#switch-dev
+depends+=(
+	deko3d libnx switch-examples switch-pkg-config 
+	devkit-env devkitA64 devkitA64-gdb general-tools
+	switch-tools switch-glm uam devkitpro-keyring 
 )
 #probably havr to link your repo in /usr/share/devtools/your repo >> /etc/pacman.conf if you want to sync in chroot
 
