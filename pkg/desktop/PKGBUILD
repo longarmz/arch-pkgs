@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-desktop
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="desktop configuration for longarmz systems"
 arch=('any')
@@ -19,22 +19,23 @@ depends=(
 
 #Apps
 depends+=(
-	discord dropbox firefox 
-	moonlight-qt plexamp-appimage 
+	anki
+	discord firefox  
 	zathura zathura-pdf-mupdf
 )
 
 #Fonts
 depends+=(
 	noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra 
-	ttf-dejavu ttf-font-awesome ttf-iosevka
+	ttf-dejavu ttf-font-awesome
 	xorg-fonts-misc
 )
 
 #Utils
 depends+=(
 	arandr conky bluez bluez-utils feh fuse2 neofetch 
-	p7zip pavucontrol pulseaudio-alsa redshift 
+	p7zip parted pavucontrol pulseaudio-alsa perl-rename
+	redshift rsync
 )
 
 #X
