@@ -1,6 +1,6 @@
 # Maintainer: <loongarmz@gmail.com>
 pkgname=longarmz-desktop
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="desktop configuration for longarmz systems"
 arch=('any')
@@ -12,15 +12,15 @@ install=longarmz-desktop.install
 #Alpha
 depends=(
 	i3-gaps i3blocks i3lock i3status
-	rofi network-manager-applet picom 
+	python-pywal rofi network-manager-applet picom 
 	rxvt-unicode
 )
 
 
 #Apps
 depends+=(
-	anki
-	discord firefox  
+	anki discord docker-compose 
+        ghostwriter firefox mcomix scrot
 	zathura zathura-pdf-mupdf
 )
 
@@ -34,8 +34,9 @@ depends+=(
 #Utils
 depends+=(
 	arandr conky bluez bluez-utils feh fuse2 neofetch 
-	p7zip parted pavucontrol pulseaudio-alsa perl-rename
-	redshift rsync
+	p7zip parted pavucontrol alsa-utils pulseaudio-bluetooth  
+    pulseaudio-alsa perl-rename redshift rsync iperf3 unrar
+	sshfs
 )
 
 #X

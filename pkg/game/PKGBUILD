@@ -1,6 +1,6 @@
 # Maintainer: longarmz <loongarmz@gmail.com>
 pkgname=longarmz-game
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="gaming config for longarmz systems"
 arch=(any)
@@ -9,4 +9,5 @@ license=(MIT)
 
 depends=( 
 	steam lib32-libpulse ttf-liberation wqy-zenhei
+	gamemode lib32-gamemode 
 )
